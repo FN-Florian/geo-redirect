@@ -6,8 +6,11 @@ use GeoIp2\Database\Reader;
 
 $reader = new Reader('/usr/share/GeoIP/GeoLite2-ASN.mmdb');
 
+
+$visitorIp = $_SERVER['REMOTE_ADDR'];
+
 // Beispiel: Holen Sie sich die ASN-Informationen für eine IP-Adresse
-$record = $reader->asn('128.101.101.101');
+$record = $reader->asn($visitorIp);
 
 echo 'ASN: ' . $record->autonomousSystemNumber . "\n";
 echo 'Organisation: ' . $record->autonomousSystemOrganization . "\n";
