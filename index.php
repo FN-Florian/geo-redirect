@@ -1,4 +1,23 @@
 <?php
+
+require 'vendor/autoload.php';
+
+use GeoIp2\Database\Reader;
+
+$reader = new Reader('/usr/share/GeoIP/GeoLite2-ASN.mmdb');
+
+// Beispiel: Holen Sie sich die ASN-Informationen für eine IP-Adresse
+$record = $reader->asn('128.101.101.101');
+
+echo 'ASN: ' . $record->autonomousSystemNumber . "\n";
+echo 'Organisation: ' . $record->autonomousSystemOrganization . "\n";
+
+echo "<br><br>";
+var_dump($record);
+
+
+
+/*
 require_once 'vendor/autoload.php'; // Pfade und Abhängigkeiten anpassen
 
 use GeoIp2\Database\Reader;
@@ -31,11 +50,13 @@ if ($_SERVER['QUERY_STRING']) {
 
 header("Location: $redirectUrl");
 exit();
-*/
+
 
 var_dump($countryCode);
 
 echo "<br><br><br>Record:<br>";
 
 var_dump($record);
+*/
 ?>
+
