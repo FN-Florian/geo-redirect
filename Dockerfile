@@ -4,6 +4,7 @@ FROM php:latest
 RUN apt-get update && apt-get install -y \
     libmaxminddb0 \
     libmaxminddb-dev \
+    libgeoip-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Installiere GeoIP2 PHP-Erweiterung
