@@ -1,4 +1,5 @@
-FROM php:latest
+#FROM php:latest
+FROM php:8-apache-buster
 
 # Installiere benötigte Pakete
 RUN apt-get update && apt-get install -y \
