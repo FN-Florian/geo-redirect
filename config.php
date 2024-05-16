@@ -8,7 +8,7 @@ $redirectUrls = [
 ];
 
 // Standard-URL für den Fall, dass das Land nicht erkannt wird
-$defaultRedirectUrl = 'https://default-url.com';
+$defaultRedirectUrl = 'https://mcfit.com';
 
 
 ?>
