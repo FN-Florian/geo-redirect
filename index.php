@@ -7,63 +7,64 @@ use GeoIp2\Database\Reader;
 $reader = new Reader('/usr/share/GeoIP/GeoLite2-Country.mmdb');
 
 
-$visitorIp = $_SERVER['REMOTE_ADDR'];
+$visitorIp = getClientIP();//$_SERVER['REMOTE_ADDR'];
 
 $record = $reader->country($visitorIp);
+$isocode = $record->country->isoCode;
 
-// Beispiel: Holen Sie sich die ASN-Informationen für eine IP-Adresse
-/*
-$record = $reader->asn($visitorIp);
-
-echo 'ASN: ' . $record->autonomousSystemNumber . "\n";
-echo 'Organisation: ' . $record->autonomousSystemOrganization . "\n";
-
-echo "<br><br>";*/
-var_dump($record);
-echo "<br><br>";
-echo 'ISO Code: ' . $record->country->isoCode . "\n";
+$referralCode = $_GET['referralCode'];
 
 
-/*
-require_once 'vendor/autoload.php'; // Pfade und Abhängigkeiten anpassen
+// Default
+$redirectUrl = "https://www.mcfit.com/checkout?validForm=false&ghostStudio=true&step=contract-selection";
 
-use GeoIp2\Database\Reader;
-
-// Pfad zur GeoIP2-Datenbank
-$databaseFile = 'GeoLite2-ASN.mmdb';
-
-// IP-Adresse des Besuchers erfassen
-$visitorIp = $_SERVER['REMOTE_ADDR'];
-
-// Herkunftsland bestimmen
-$reader = new Reader($databaseFile);
-$record = $reader->country($visitorIp);
-$countryCode = $record->country->isoCode;
-
-/*
-include("config.php");
-
-// Weiterleitung durchführen
-if (isset($redirectUrls[$countryCode])) {
-    $redirectUrl = $redirectUrls[$countryCode];
-} else {
-    $redirectUrl = $defaultRedirectUrl;
+if($isocode == "DE")
+{
+    $redirectUrl = "https://www.mcfit.com/checkout?validForm=false&ghostStudio=true&step=contract-selection";
+}
+elseif($isocode == "AT")
+{
+    $redirectUrl = "https://www.mcfit.com/at/checkout?validForm=false&ghostStudio=true&step=contract-selection";
+}
+elseif($isocode == "IT")
+{
+    $redirectUrl = "https://www.mcfit.com/it/checkout?validForm=false&ghostStudio=false&step=studio-selection";
+}
+elseif($isocode == "ES")
+{
+    $redirectUrl = "https://www.mcfit.com/es/checkout?validForm=false&ghostStudio=true&step=contract-selection";
 }
 
-// URL-Parameter übernehmen
-if ($_SERVER['QUERY_STRING']) {
-    $redirectUrl .= '?' . $_SERVER['QUERY_STRING'];
-}
+
+$redirectUrl = $redirectUrl."&referralCode=".$referralCode";
 
 header("Location: $redirectUrl");
-exit();
+
+echo "
+<meta http-equiv='refresh' content='0.0; URL=".$redirectUrl."'>
+";
 
 
-var_dump($countryCode);
+<?php
+function getClientIP() {
+    $ipaddress = '';
 
-echo "<br><br><br>Record:<br>";
+    if (isset($_SERVER['HTTP_CLIENT_IP']))
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if(isset($_SERVER['HTTP_X_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if(isset($_SERVER['HTTP_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if(isset($_SERVER['REMOTE_ADDR']))
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
 
-var_dump($record);
-*/
+    return $ipaddress;
+}
+
 ?>
-
