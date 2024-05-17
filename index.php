@@ -20,7 +20,8 @@ echo 'Organisation: ' . $record->autonomousSystemOrganization . "\n";
 
 echo "<br><br>";*/
 var_dump($record);
-
+echo "<br><br>";
+echo 'ISO Code: ' . $record->country->isoCode . "\n";
 
 
 /*
