@@ -36,7 +36,7 @@ elseif($isocode == "ES")
 }
 
 
-$redirectUrl = $redirectUrl."&referralCode=".$referralCode";
+$redirectUrl = $redirectUrl."&referralCode=".$referralCode;
 
 header("Location: $redirectUrl");
 
