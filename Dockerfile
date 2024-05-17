@@ -24,7 +24,6 @@ WORKDIR /var/www/html
 
 # Kopiere PHP-Skript
 COPY index.php /var/www/html/index.php
-COPY config.php /var/www/html/config.php
 COPY GeoLite2-Country.mmdb /var/www/html/GeoLite2-Country.mmdb
 
 # Exponiere Port (falls erforderlich)
