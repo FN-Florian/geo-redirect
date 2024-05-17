@@ -9,6 +9,8 @@ $reader = new Reader('/usr/share/GeoIP/GeoLite2-Country.mmdb');
 
 $visitorIp = $_SERVER['REMOTE_ADDR'];
 
+$record = $reader->country($visitorIp);
+
 // Beispiel: Holen Sie sich die ASN-Informationen für eine IP-Adresse
 /*
 $record = $reader->asn($visitorIp);
