@@ -45,7 +45,7 @@ echo "
 ";
 
 
-<?php
+
 function getClientIP() {
     $ipaddress = '';
 
