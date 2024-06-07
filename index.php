@@ -24,11 +24,7 @@ else
 
 if(isset($_GET['lang']))
 {
-    $lang = $_GET['lang'];
-}
-else
-{
-    $lang = "";
+    $isocode = $_GET['lang'];
 }
 
 
@@ -55,10 +51,6 @@ elseif($isocode == "ES")
 if($referralCode != "")
 {
     $redirectUrl = $redirectUrl."&referralCode=".$referralCode;
-}
-if($lang != "")
-{
-    $redirectUrl = $redirectUrl."&lang=".$lang;
 }
 
 
