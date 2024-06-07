@@ -13,7 +13,23 @@ $visitorIp = getClientIP();//$_SERVER['REMOTE_ADDR'];
 $record = $reader->country($visitorIp);
 $isocode = $record->country->isoCode;
 
-$referralCode = $_GET['referralCode'];
+if(isset($_GET['referralCode']))
+{
+    $referralCode = $_GET['referralCode'];
+}
+else
+{
+    $referralCode = "";
+}
+
+if(isset($_GET['lang']))
+{
+    $lang = $_GET['lang'];
+}
+else
+{
+    $lang = "";
+}
 
 
 // Default
@@ -36,8 +52,15 @@ elseif($isocode == "ES")
     $redirectUrl = "https://www.mcfit.com/es/checkout?validForm=false&ghostStudio=true&step=contract-selection";
 }
 
+if($referralCode != "")
+{
+    $redirectUrl = $redirectUrl."&referralCode=".$referralCode;
+}
+if($lang != "")
+{
+    $redirectUrl = $redirectUrl."&lang=".$lang;
+}
 
-$redirectUrl = $redirectUrl."&referralCode=".$referralCode;
 
 header("Location: $redirectUrl");
 
