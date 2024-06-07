@@ -24,7 +24,7 @@ else
 
 if(isset($_GET['lang']))
 {
-    $isocode = $_GET['lang'];
+    $isocode = strtoupper($_GET['lang']);
 }
 
 
